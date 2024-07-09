@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @Entity
+@Table(name = "trips")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -41,6 +42,7 @@ public class Trip {
     public Trip(TripRequestPayload data) {
         this.destination = data.destination();
         this.isConfirmed = false;
+        this.ownerName = data.owner_name();
         this.ownerEmail = data.owner_email();
         this.startsAt = LocalDateTime.parse(data.starts_at(), DateTimeFormatter.ISO_DATE_TIME);
         this.endsAt = LocalDateTime.parse(data.ends_at(), DateTimeFormatter.ISO_DATE_TIME);
