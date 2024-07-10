@@ -10,5 +10,5 @@ public class ParticipantService {
     public void registerParticipantsToEvent(List<String> participantsToInvite, UUID tripId) {
     }
 
-    public void TriggerConfirmationEmailToParticipants(UUID tripId) {};
+    public void triggerConfirmationEmailToParticipants(UUID tripId) {};
 }

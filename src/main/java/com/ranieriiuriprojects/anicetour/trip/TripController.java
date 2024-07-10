@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -34,5 +36,46 @@ public class TripController {
 
         //faz um map no id passando na req, se tiver info, retorna em ResponseEntity, senão, Retorna 'notFound'
         return trip.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    };
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Trip> updateTrip(@PathVariable UUID id, @RequestBody TripRequestPayload payload) {
+        Optional<Trip> trip = this.repository.findById(id);
+
+        if(trip.isPresent()) {
+            Trip rawTrip = trip.get();
+            rawTrip.setDestination(payload.destination());
+            rawTrip.setStartsAt(LocalDateTime.parse(payload.starts_at(), DateTimeFormatter.ISO_DATE_TIME));
+            rawTrip.setEndsAt(LocalDateTime.parse(payload.ends_at(), DateTimeFormatter.ISO_DATE_TIME));
+
+            this.repository.save(rawTrip);
+
+            return ResponseEntity.ok(rawTrip);
+        }
+
+
+
+        //Senão encontrar a trip possivelmente enviada na req, retorna o status notfound...
+        return ResponseEntity.notFound().build();
+    };
+
+    @GetMapping("/{id}/tripConfirmation")
+    public ResponseEntity<Trip> confirmTrip(@PathVariable UUID id) {
+        Optional<Trip> trip = this.repository.findById(id);
+
+        if(trip.isPresent()) {
+            Trip rawTrip = trip.get();
+            rawTrip.setIsConfirmed(true);
+
+            this.repository.save(rawTrip);
+            this.participantService.triggerConfirmationEmailToParticipants(id);
+
+            return ResponseEntity.ok(rawTrip);
+        }
+
+
+
+        //Senão encontrar a trip possivelmente enviada na req, retorna o status notfound...
+        return ResponseEntity.notFound().build();
     };
 }
