@@ -25,7 +25,7 @@ public class TripController {
         Trip newTrip = new Trip(payload);
 
         this.repository.save(newTrip);
-        this.participantService.registerParticipantsToEvent(payload.emails_to_invite(), newTrip.getId());
+        this.participantService.registerParticipantsToEvent(payload.emails_to_invite(), newTrip);
 
         return ResponseEntity.ok(new TripCreateResponse(newTrip.getId()));
     }
@@ -59,7 +59,7 @@ public class TripController {
         return ResponseEntity.notFound().build();
     };
 
-    @GetMapping("/{id}/tripConfirmation")
+    @GetMapping("/{id}/confirm")
     public ResponseEntity<Trip> confirmTrip(@PathVariable UUID id) {
         Optional<Trip> trip = this.repository.findById(id);
 
