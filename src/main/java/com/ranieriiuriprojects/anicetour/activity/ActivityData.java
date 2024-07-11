@@ -1,4 +1,4 @@
-package com.ranieriiuriprojects.anicetour.activities;
+package com.ranieriiuriprojects.anicetour.activity;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

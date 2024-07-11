@@ -1,4 +1,4 @@
-package com.ranieriiuriprojects.anicetour.activities;
+package com.ranieriiuriprojects.anicetour.activity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

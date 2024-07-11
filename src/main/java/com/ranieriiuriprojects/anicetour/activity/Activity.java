@@ -1,4 +1,4 @@
-package com.ranieriiuriprojects.anicetour.activities;
+package com.ranieriiuriprojects.anicetour.activity;
 
 import com.ranieriiuriprojects.anicetour.trip.Trip;
 import jakarta.persistence.*;

@@ -1,9 +1,9 @@
 package com.ranieriiuriprojects.anicetour.trip;
 
-import com.ranieriiuriprojects.anicetour.activities.ActivityData;
-import com.ranieriiuriprojects.anicetour.activities.ActivityRequestPayload;
-import com.ranieriiuriprojects.anicetour.activities.ActivityResponse;
-import com.ranieriiuriprojects.anicetour.activities.ActivityService;
+import com.ranieriiuriprojects.anicetour.activity.ActivityData;
+import com.ranieriiuriprojects.anicetour.activity.ActivityRequestPayload;
+import com.ranieriiuriprojects.anicetour.activity.ActivityResponse;
+import com.ranieriiuriprojects.anicetour.activity.ActivityService;
 import com.ranieriiuriprojects.anicetour.participant.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

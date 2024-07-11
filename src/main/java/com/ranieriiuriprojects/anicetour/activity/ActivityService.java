@@ -1,6 +1,5 @@
-package com.ranieriiuriprojects.anicetour.activities;
+package com.ranieriiuriprojects.anicetour.activity;
 
-import com.ranieriiuriprojects.anicetour.participant.ParticipantData;
 import com.ranieriiuriprojects.anicetour.trip.Trip;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
