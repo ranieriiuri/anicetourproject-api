@@ -1,5 +1,8 @@
 package com.ranieriiuriprojects.anicetour.trip;
 
+import com.ranieriiuriprojects.anicetour.activities.ActivityRequestPayload;
+import com.ranieriiuriprojects.anicetour.activities.ActivityResponse;
+import com.ranieriiuriprojects.anicetour.activities.ActivityService;
 import com.ranieriiuriprojects.anicetour.participant.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -7,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -18,6 +20,9 @@ public class TripController {
 
     @Autowired
     private ParticipantService participantService;
+
+    @Autowired
+    private ActivityService activityService;
 
     @Autowired
     private TripRepository repository;
@@ -99,6 +104,24 @@ public class TripController {
             return ResponseEntity.ok(participantResponse);
         }
             //Senão retorna o status notfound...
+        return ResponseEntity.notFound().build();
+
+    }
+
+    //Reg. atividades..
+    @PostMapping("/{id}/activities")
+    public ResponseEntity<ActivityResponse> registerActivity(@PathVariable UUID id, @RequestBody ActivityRequestPayload payload) {
+        Optional<Trip> trip = this.repository.findById(id);
+
+        if (trip.isPresent()) {
+            //Se houver viagem recebida em trip,pegar...
+            Trip rawTrip = trip.get();
+
+            ActivityResponse activityResponse = this.activityService.registerActivity(payload, rawTrip);
+
+            return ResponseEntity.ok(activityResponse);
+        }
+        //Senão retorna o status notfound...
         return ResponseEntity.notFound().build();
 
     }
