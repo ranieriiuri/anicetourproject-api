@@ -1,5 +1,6 @@
 package com.ranieriiuriprojects.anicetour.trip;
 
+import com.ranieriiuriprojects.anicetour.activities.ActivityData;
 import com.ranieriiuriprojects.anicetour.activities.ActivityRequestPayload;
 import com.ranieriiuriprojects.anicetour.activities.ActivityResponse;
 import com.ranieriiuriprojects.anicetour.activities.ActivityService;
@@ -131,5 +132,13 @@ public class TripController {
         List<ParticipantData> participantList = this.participantService.getAllParticipantsFromEvent(id);
 
         return ResponseEntity.ok(participantList);
+    }
+
+    //Listar atividades...
+    @GetMapping("/{id}/activities")
+    public ResponseEntity<List<ActivityData>> getAllActivities(@PathVariable UUID id){
+        List<ActivityData> activityDataList = this.activityService.getAllActivitiesFromId(id);
+
+        return ResponseEntity.ok(activityDataList);
     }
 }
